@@ -1,7 +1,7 @@
 import Player from '@vimeo/player';
 import throttle from 'lodash.throttle';
 
-console.log(Player)
+// console.log(Player)
 
 const iframe = document.querySelector('iframe');
 const player = new Player(iframe);
@@ -17,7 +17,7 @@ const onPlay = function(data) {
 player.on('timeupdate', throttle(onPlay, 1500));
 
 player.getVideoTitle().then(function(title) {
-    console.log('title:', title);
+    // console.log('title:', title);
 });
 
 
