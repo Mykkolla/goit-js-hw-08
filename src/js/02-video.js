@@ -12,16 +12,24 @@ const onPlay = function(data) {
  
 };
 
+
+function geCurrentTime() {
 const time = localStorage.getItem("videoplayer-current-time");
-const timePars = JSON.parse(time);
-console.log(timePars); 
+if (time) {
+    const timePars = JSON.parse(time);
+    
+    return timePars;
+}
+}
+// const time = localStorage.getItem("videoplayer-current-time");
+console.log(geCurrentTime())
 
 player.on('timeupdate', throttle(onPlay, 1500));
 
 
 
 
-player.setCurrentTime(timePars).then(function(seconds) {
+player.setCurrentTime(geCurrentTime()).then(function(seconds) {
 }).catch(function(error) {
     switch (error.name) {
         case 'RangeError':
