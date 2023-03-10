@@ -14,8 +14,8 @@ formMain.addEventListener('submit', hendSubmitForm);
 const inputEx = {};
 
 function hendlerFormInput (e) {   
-const { target: input } = e;
-inputEx[input.name] = input.value
+const { target: inputallForm } = e;
+inputEx[inputallForm.name] = inputallForm.value
 localStorage.setItem(FEEDBACKITEM, JSON.stringify(inputEx));
 }
 
@@ -25,8 +25,10 @@ function hendSubmitForm (e) {
         alert("Введите данные!");
         return false;
       }
+      console.log(inputEx);
     e.target.reset();
     localStorage.removeItem(FEEDBACKITEM);
+
 }
 returnTextereaForm();
 
