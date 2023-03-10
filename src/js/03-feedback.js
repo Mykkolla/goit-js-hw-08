@@ -10,37 +10,21 @@ const formText = document.querySelector('.feedback-form textarea');
 formMain.addEventListener('input', throttle(hendlerFormInput, 500));
 formMain.addEventListener('submit', hendSubmitForm);
 
+// const inputEx = {};
 
-const inputEx = {};
+
 
 function hendlerFormInput (e) {   
-const { target: inputallForm } = e;
-if (formInput.value === '' && formText.value === "") {
-    localStorage.removeItem(FEEDBACKITEM);
+// const { target: inputallForm } = e;
+// inputEx[inputallForm.name] = inputallForm.value
+const inputEx = {
+    email: formInput.value,
+    message: formText.value
+};
+localStorage.setItem(FEEDBACKITEM, JSON.stringify(inputEx));
 }
-else {
-    inputEx[inputallForm.name] = inputallForm.value
-    localStorage.setItem(FEEDBACKITEM, JSON.stringify(inputEx));
-}  
-}
 
 
-// const inputEx = {
-//     email: formInput.value,
-//     message: formText.value
-// };
-
-
-function hendSubmitForm (e) {
-    e.preventDefault();
-    if (formInput.value.trim() === "" || formText.value === '') {
-        alert("Введите данные!");
-        return;
-      }
-    console.log(inputEx);
-    e.target.reset();
-    localStorage.removeItem(FEEDBACKITEM);
-}
 returnTextereaForm();
 
 function returnTextereaForm () {
@@ -50,4 +34,17 @@ function returnTextereaForm () {
         formText.value = parsedSettings.message;
         formInput.value = parsedSettings.email;
     }
+}
+function hendSubmitForm (e) {
+    e.preventDefault();
+    // if (formInput.value.trim() === "" || formText.value === '') {
+    //     alert("Введите данные!");
+    //     return;
+    //   }
+    console.log(inputEx);
+    localStorage.removeItem(FEEDBACKITEM);
+    e.target.reset();
+    formInput.value = '';
+    formText.value = '';
+    
 }
