@@ -21,7 +21,26 @@ const inputEx = {
     email: formInput.value,
     message: formText.value
 };
-localStorage.setItem(FEEDBACKITEM, JSON.stringify(inputEx));
+return localStorage.setItem(FEEDBACKITEM, JSON.stringify(inputEx));
+}
+
+
+function hendSubmitForm (e) {
+    e.preventDefault();
+    // if (formInput.value.trim() === "" || formText.value === '') {
+    //     alert("Введите данные!");
+    //     return;
+    //   }
+    const formData = {
+        email: formInput.value,
+        message: formText.value,
+      };
+      console.log(formData);
+    localStorage.removeItem(FEEDBACKITEM);
+    e.target.reset();
+    formInput.value = '';
+    formText.value = '';
+    
 }
 
 
@@ -34,17 +53,4 @@ function returnTextereaForm () {
         formText.value = parsedSettings.message;
         formInput.value = parsedSettings.email;
     }
-}
-function hendSubmitForm (e) {
-    e.preventDefault();
-    // if (formInput.value.trim() === "" || formText.value === '') {
-    //     alert("Введите данные!");
-    //     return;
-    //   }
-    console.log(inputEx);
-    localStorage.removeItem(FEEDBACKITEM);
-    e.target.reset();
-    formInput.value = '';
-    formText.value = '';
-    
 }
