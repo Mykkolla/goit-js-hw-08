@@ -40,7 +40,8 @@ function returnTextereaForm () {
         formText.value = parsedSettings.message;
         formInput.value = parsedSettings.email;
     }
-
+    formText.value = "type message";
+    formInput.value = "type email";
 
 
 }
