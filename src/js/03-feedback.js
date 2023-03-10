@@ -15,32 +15,38 @@ const inputEx = {};
 
 function hendlerFormInput (e) {   
 const { target: inputallForm } = e;
-inputEx[inputallForm.name] = inputallForm.value
-localStorage.setItem(FEEDBACKITEM, JSON.stringify(inputEx));
+if (formInput.value === '' && formText.value === "") {
+    localStorage.removeItem(FEEDBACKITEM);
+}
+else {
+    inputEx[inputallForm.name] = inputallForm.value
+    localStorage.setItem(FEEDBACKITEM, JSON.stringify(inputEx));
+}  
+}
+
 
 // const inputEx = {
 //     email: formInput.value,
 //     message: formText.value
 // };
-}
+
 
 function hendSubmitForm (e) {
     e.preventDefault();
     if (formInput.value.trim() === "" || formText.value === '') {
         alert("Введите данные!");
-        return false;
+        return;
       }
-      console.log(inputEx);
-    localStorage.removeItem(FEEDBACKITEM);
+    console.log(inputEx);
     e.target.reset();
+    localStorage.removeItem(FEEDBACKITEM);
 }
 returnTextereaForm();
 
 function returnTextereaForm () {
     const localGet = localStorage.getItem(FEEDBACKITEM); 
-    const parsedSettings = JSON.parse(localGet);
-
     if (localGet) {
+        const parsedSettings = JSON.parse(localGet);
         formText.value = parsedSettings.message;
         formInput.value = parsedSettings.email;
     }
