@@ -7,7 +7,7 @@ const formText = document.querySelector('.feedback-form textarea');
 
 
 
-formMain.addEventListener('input', throttle(hendlerFormInput, 1000));
+formMain.addEventListener('input', throttle(hendlerFormInput, 500));
 formMain.addEventListener('submit', hendSubmitForm);
 
 
@@ -17,18 +17,22 @@ function hendlerFormInput (e) {
 const { target: inputallForm } = e;
 inputEx[inputallForm.name] = inputallForm.value
 localStorage.setItem(FEEDBACKITEM, JSON.stringify(inputEx));
+
+// const inputEx = {
+//     email: formInput.value,
+//     message: formText.value
+// };
 }
 
 function hendSubmitForm (e) {
     e.preventDefault();
-    if (formInput.value.trim() === "") {
+    if (formInput.value.trim() === "" || formText.value === '') {
         alert("Введите данные!");
         return false;
       }
       console.log(inputEx);
-    e.target.reset();
     localStorage.removeItem(FEEDBACKITEM);
-
+    e.target.reset();
 }
 returnTextereaForm();
 
@@ -36,7 +40,7 @@ function returnTextereaForm () {
     const localGet = localStorage.getItem(FEEDBACKITEM); 
     const parsedSettings = JSON.parse(localGet);
 
-    if (parsedSettings) {
+    if (localGet) {
         formText.value = parsedSettings.message;
         formInput.value = parsedSettings.email;
     }
